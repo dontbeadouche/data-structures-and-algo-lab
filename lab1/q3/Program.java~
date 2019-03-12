@@ -1,0 +1,38 @@
+import java.util.*;
+
+class Program
+{
+
+  public static void main (String args[])
+  {
+
+    Scanner sc = new Scanner (System.in);
+      System.out.print ("Enter length of array :");
+    int n = sc.nextInt ();
+    int arr[] = new int[n];
+
+    for (int i = 0; i < n; i++)
+      {
+	System.out.print ("Enter element : ");
+	arr[i] = sc.nextInt ();
+      }
+
+    boolean q = Program.checkDuplicate (arr, n);
+    System.out.println (q);
+  }
+
+
+  public static boolean checkDuplicate (int array[], int n)
+  {
+    int i, j;
+    for (i = 0; i < n; i++)
+      {
+	for (j = i + 1; j < n; j++)
+	  {
+	    if (array[i] == array[j])
+	      return true;
+	  }
+      }
+    return false;
+  }
+  }

@@ -1,0 +1,115 @@
+Q
+rt java.io.*;
+import java.util.*;
+
+class Student
+{
+
+  public String[] name = new String[2];
+    public int ID;
+      public int year;
+        public float GPA;
+
+	  void add (int ID, int year, float GPA, String fname, String lname)
+	    {
+	        this.ID = ID;
+		    this.year = year;
+		        this.GPA = GPA;
+			    this.name[0] = fname;
+			        this.name[1] = lname;
+				  }
+				  }
+
+				  class Sort
+				  {
+
+
+				    static Student[] QuickSort (Student[]S, int low, int high)
+				      {
+				          if (low < high)
+					        {
+						        int pi = partition (S, low, high);
+							          QuickSort (S, low, pi - 1);
+								            QuickSort (S, pi + 1, high);
+									          }
+										      return S;
+										        }
+
+											  static int partition (Student[]S, int low, int high)
+											    {
+											        String Pivot = S[high].name[0];
+												    int i = low - 1;
+												        for (int j = low; j <= high - 1; j++)
+													      {
+													              if (S[j].name[0].compareTo (Pivot) < 0)
+														                {
+																            i++;
+																	                Student temp = S[i];
+																			            S[i] = S[j];
+																				                S[j] = temp;
+																						          }
+
+																							        }
+																								    Student temp = S[i + 1];
+																								        S[i + 1] = S[high];
+																									    S[high] = temp;
+																									        return i + 1;
+																										  }
+
+																										    static void display (ArrayList < Student > l)
+																										      {
+																										        for (Student st:l)
+																											      {
+																											              System.out.println ("ID of Student : " + st.ID);
+																												              System.out.println ("Name of Student : " + st.name[0] + " " +
+																													                                  st.name[1]);
+																																	          System.out.println ("Year : " + st.year);
+																																		          System.out.println ("GPA of Student : " + st.GPA);
+																																			          System.out.println ();
+																																				        }
+																																					  }
+
+																																					    public static void main (String args[]) throws FileNotFoundException
+																																					      {
+																																					          Student st;
+																																						      File f = new File ("Student.txt");
+																																						          Scanner s = new Scanner (f);
+
+																																							      int ID, year;
+																																							          float GPA;
+																																								      String fname, lname;
+																																								          int count = 0;
+																																									        ArrayList < Student > l = new ArrayList < Student > ();
+
+																																										    while (s.hasNext ())
+																																										          {
+																																											          st = new Student ();
+																																												          ID = Integer.parseInt (s.next ());
+																																													          year = Integer.parseInt (s.next ());
+																																														          GPA = Float.parseFloat (s.next ());
+																																															          fname = s.next ();
+																																																          lname = s.nextLine ();
+																																																	          st.add (ID, year, GPA, fname, lname);
+																																																		          l.add (st);
+																																																			          count++;
+																																																				        }
+
+																																																					    System.out.println ("Ordered by first name " + count);
+																																																					        Student[]S = new Student[count];
+																																																						    S = (Student[])l.toArray (S);
+																																																						        S = QuickSort (S, 0, count - 1);
+																																																							    l.clear ();
+																																																							        l = new ArrayList<Student>(Arrays.asList());
+																																																								    int i = 0;
+																																																								        while (i < count)
+																																																									      {
+																																																									              st = new Student ();
+																																																										              st.add (S[i].ID, S[i].year, S[i].GPA, S[i].name[0], S[i].name[1]);
+																																																											              l.add (st);
+																																																												              i++;
+																																																													            }
+
+																																																														        display (l);
+																																																															    s.close ();
+																																																															      }
+																																																															      }
